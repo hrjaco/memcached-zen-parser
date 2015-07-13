@@ -1,0 +1,9 @@
+package memcached_zen;
+
+message Hash {
+  repeated Pair pairs = 1;
+  message Pair {
+    optional string key = 1;
+    optional string value = 2;
+  }
+}
