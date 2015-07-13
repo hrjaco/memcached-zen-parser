@@ -33,19 +33,19 @@ void  protobuf_AddDesc_memcached_2dzen_2eproto();
 void protobuf_AssignDesc_memcached_2dzen_2eproto();
 void protobuf_ShutdownFile_memcached_2dzen_2eproto();
 
+class HashEntry;
 class Hash;
-class Hash_Pair;
 
 // ===================================================================
 
-class Hash_Pair : public ::google::protobuf::Message {
+class HashEntry : public ::google::protobuf::Message {
  public:
-  Hash_Pair();
-  virtual ~Hash_Pair();
+  HashEntry();
+  virtual ~HashEntry();
 
-  Hash_Pair(const Hash_Pair& from);
+  HashEntry(const HashEntry& from);
 
-  inline Hash_Pair& operator=(const Hash_Pair& from) {
+  inline HashEntry& operator=(const HashEntry& from) {
     CopyFrom(from);
     return *this;
   }
@@ -59,17 +59,17 @@ class Hash_Pair : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Hash_Pair& default_instance();
+  static const HashEntry& default_instance();
 
-  void Swap(Hash_Pair* other);
+  void Swap(HashEntry* other);
 
   // implements Message ----------------------------------------------
 
-  Hash_Pair* New() const;
+  HashEntry* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Hash_Pair& from);
-  void MergeFrom(const Hash_Pair& from);
+  void CopyFrom(const HashEntry& from);
+  void MergeFrom(const HashEntry& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -115,7 +115,7 @@ class Hash_Pair : public ::google::protobuf::Message {
   inline ::std::string* release_value();
   inline void set_allocated_value(::std::string* value);
 
-  // @@protoc_insertion_point(class_scope:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(class_scope:memcached_zen.HashEntry)
  private:
   inline void set_has_key();
   inline void clear_has_key();
@@ -133,7 +133,7 @@ class Hash_Pair : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_memcached_2dzen_2eproto();
 
   void InitAsDefaultInstance();
-  static Hash_Pair* default_instance_;
+  static HashEntry* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -188,21 +188,19 @@ class Hash : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef Hash_Pair Pair;
-
   // accessors -------------------------------------------------------
 
-  // repeated .memcached_zen.Hash.Pair pairs = 1;
-  inline int pairs_size() const;
-  inline void clear_pairs();
-  static const int kPairsFieldNumber = 1;
-  inline const ::memcached_zen::Hash_Pair& pairs(int index) const;
-  inline ::memcached_zen::Hash_Pair* mutable_pairs(int index);
-  inline ::memcached_zen::Hash_Pair* add_pairs();
-  inline const ::google::protobuf::RepeatedPtrField< ::memcached_zen::Hash_Pair >&
-      pairs() const;
-  inline ::google::protobuf::RepeatedPtrField< ::memcached_zen::Hash_Pair >*
-      mutable_pairs();
+  // repeated .memcached_zen.HashEntry entries = 1;
+  inline int entries_size() const;
+  inline void clear_entries();
+  static const int kEntriesFieldNumber = 1;
+  inline const ::memcached_zen::HashEntry& entries(int index) const;
+  inline ::memcached_zen::HashEntry* mutable_entries(int index);
+  inline ::memcached_zen::HashEntry* add_entries();
+  inline const ::google::protobuf::RepeatedPtrField< ::memcached_zen::HashEntry >&
+      entries() const;
+  inline ::google::protobuf::RepeatedPtrField< ::memcached_zen::HashEntry >*
+      mutable_entries();
 
   // @@protoc_insertion_point(class_scope:memcached_zen.Hash)
  private:
@@ -211,7 +209,7 @@ class Hash : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::memcached_zen::Hash_Pair > pairs_;
+  ::google::protobuf::RepeatedPtrField< ::memcached_zen::HashEntry > entries_;
   friend void  protobuf_AddDesc_memcached_2dzen_2eproto();
   friend void protobuf_AssignDesc_memcached_2dzen_2eproto();
   friend void protobuf_ShutdownFile_memcached_2dzen_2eproto();
@@ -224,61 +222,61 @@ class Hash : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// Hash_Pair
+// HashEntry
 
 // optional string key = 1;
-inline bool Hash_Pair::has_key() const {
+inline bool HashEntry::has_key() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Hash_Pair::set_has_key() {
+inline void HashEntry::set_has_key() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Hash_Pair::clear_has_key() {
+inline void HashEntry::clear_has_key() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Hash_Pair::clear_key() {
+inline void HashEntry::clear_key() {
   if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     key_->clear();
   }
   clear_has_key();
 }
-inline const ::std::string& Hash_Pair::key() const {
-  // @@protoc_insertion_point(field_get:memcached_zen.Hash.Pair.key)
+inline const ::std::string& HashEntry::key() const {
+  // @@protoc_insertion_point(field_get:memcached_zen.HashEntry.key)
   return *key_;
 }
-inline void Hash_Pair::set_key(const ::std::string& value) {
+inline void HashEntry::set_key(const ::std::string& value) {
   set_has_key();
   if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     key_ = new ::std::string;
   }
   key_->assign(value);
-  // @@protoc_insertion_point(field_set:memcached_zen.Hash.Pair.key)
+  // @@protoc_insertion_point(field_set:memcached_zen.HashEntry.key)
 }
-inline void Hash_Pair::set_key(const char* value) {
+inline void HashEntry::set_key(const char* value) {
   set_has_key();
   if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     key_ = new ::std::string;
   }
   key_->assign(value);
-  // @@protoc_insertion_point(field_set_char:memcached_zen.Hash.Pair.key)
+  // @@protoc_insertion_point(field_set_char:memcached_zen.HashEntry.key)
 }
-inline void Hash_Pair::set_key(const char* value, size_t size) {
+inline void HashEntry::set_key(const char* value, size_t size) {
   set_has_key();
   if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     key_ = new ::std::string;
   }
   key_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:memcached_zen.Hash.Pair.key)
+  // @@protoc_insertion_point(field_set_pointer:memcached_zen.HashEntry.key)
 }
-inline ::std::string* Hash_Pair::mutable_key() {
+inline ::std::string* HashEntry::mutable_key() {
   set_has_key();
   if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     key_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:memcached_zen.Hash.Pair.key)
+  // @@protoc_insertion_point(field_mutable:memcached_zen.HashEntry.key)
   return key_;
 }
-inline ::std::string* Hash_Pair::release_key() {
+inline ::std::string* HashEntry::release_key() {
   clear_has_key();
   if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -288,7 +286,7 @@ inline ::std::string* Hash_Pair::release_key() {
     return temp;
   }
 }
-inline void Hash_Pair::set_allocated_key(::std::string* key) {
+inline void HashEntry::set_allocated_key(::std::string* key) {
   if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete key_;
   }
@@ -299,62 +297,62 @@ inline void Hash_Pair::set_allocated_key(::std::string* key) {
     clear_has_key();
     key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:memcached_zen.Hash.Pair.key)
+  // @@protoc_insertion_point(field_set_allocated:memcached_zen.HashEntry.key)
 }
 
 // optional string value = 2;
-inline bool Hash_Pair::has_value() const {
+inline bool HashEntry::has_value() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Hash_Pair::set_has_value() {
+inline void HashEntry::set_has_value() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Hash_Pair::clear_has_value() {
+inline void HashEntry::clear_has_value() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Hash_Pair::clear_value() {
+inline void HashEntry::clear_value() {
   if (value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     value_->clear();
   }
   clear_has_value();
 }
-inline const ::std::string& Hash_Pair::value() const {
-  // @@protoc_insertion_point(field_get:memcached_zen.Hash.Pair.value)
+inline const ::std::string& HashEntry::value() const {
+  // @@protoc_insertion_point(field_get:memcached_zen.HashEntry.value)
   return *value_;
 }
-inline void Hash_Pair::set_value(const ::std::string& value) {
+inline void HashEntry::set_value(const ::std::string& value) {
   set_has_value();
   if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     value_ = new ::std::string;
   }
   value_->assign(value);
-  // @@protoc_insertion_point(field_set:memcached_zen.Hash.Pair.value)
+  // @@protoc_insertion_point(field_set:memcached_zen.HashEntry.value)
 }
-inline void Hash_Pair::set_value(const char* value) {
+inline void HashEntry::set_value(const char* value) {
   set_has_value();
   if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     value_ = new ::std::string;
   }
   value_->assign(value);
-  // @@protoc_insertion_point(field_set_char:memcached_zen.Hash.Pair.value)
+  // @@protoc_insertion_point(field_set_char:memcached_zen.HashEntry.value)
 }
-inline void Hash_Pair::set_value(const char* value, size_t size) {
+inline void HashEntry::set_value(const char* value, size_t size) {
   set_has_value();
   if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     value_ = new ::std::string;
   }
   value_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:memcached_zen.Hash.Pair.value)
+  // @@protoc_insertion_point(field_set_pointer:memcached_zen.HashEntry.value)
 }
-inline ::std::string* Hash_Pair::mutable_value() {
+inline ::std::string* HashEntry::mutable_value() {
   set_has_value();
   if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     value_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:memcached_zen.Hash.Pair.value)
+  // @@protoc_insertion_point(field_mutable:memcached_zen.HashEntry.value)
   return value_;
 }
-inline ::std::string* Hash_Pair::release_value() {
+inline ::std::string* HashEntry::release_value() {
   clear_has_value();
   if (value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -364,7 +362,7 @@ inline ::std::string* Hash_Pair::release_value() {
     return temp;
   }
 }
-inline void Hash_Pair::set_allocated_value(::std::string* value) {
+inline void HashEntry::set_allocated_value(::std::string* value) {
   if (value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete value_;
   }
@@ -375,41 +373,41 @@ inline void Hash_Pair::set_allocated_value(::std::string* value) {
     clear_has_value();
     value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:memcached_zen.Hash.Pair.value)
+  // @@protoc_insertion_point(field_set_allocated:memcached_zen.HashEntry.value)
 }
 
 // -------------------------------------------------------------------
 
 // Hash
 
-// repeated .memcached_zen.Hash.Pair pairs = 1;
-inline int Hash::pairs_size() const {
-  return pairs_.size();
+// repeated .memcached_zen.HashEntry entries = 1;
+inline int Hash::entries_size() const {
+  return entries_.size();
 }
-inline void Hash::clear_pairs() {
-  pairs_.Clear();
+inline void Hash::clear_entries() {
+  entries_.Clear();
 }
-inline const ::memcached_zen::Hash_Pair& Hash::pairs(int index) const {
-  // @@protoc_insertion_point(field_get:memcached_zen.Hash.pairs)
-  return pairs_.Get(index);
+inline const ::memcached_zen::HashEntry& Hash::entries(int index) const {
+  // @@protoc_insertion_point(field_get:memcached_zen.Hash.entries)
+  return entries_.Get(index);
 }
-inline ::memcached_zen::Hash_Pair* Hash::mutable_pairs(int index) {
-  // @@protoc_insertion_point(field_mutable:memcached_zen.Hash.pairs)
-  return pairs_.Mutable(index);
+inline ::memcached_zen::HashEntry* Hash::mutable_entries(int index) {
+  // @@protoc_insertion_point(field_mutable:memcached_zen.Hash.entries)
+  return entries_.Mutable(index);
 }
-inline ::memcached_zen::Hash_Pair* Hash::add_pairs() {
-  // @@protoc_insertion_point(field_add:memcached_zen.Hash.pairs)
-  return pairs_.Add();
+inline ::memcached_zen::HashEntry* Hash::add_entries() {
+  // @@protoc_insertion_point(field_add:memcached_zen.Hash.entries)
+  return entries_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::memcached_zen::Hash_Pair >&
-Hash::pairs() const {
-  // @@protoc_insertion_point(field_list:memcached_zen.Hash.pairs)
-  return pairs_;
+inline const ::google::protobuf::RepeatedPtrField< ::memcached_zen::HashEntry >&
+Hash::entries() const {
+  // @@protoc_insertion_point(field_list:memcached_zen.Hash.entries)
+  return entries_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::memcached_zen::Hash_Pair >*
-Hash::mutable_pairs() {
-  // @@protoc_insertion_point(field_mutable_list:memcached_zen.Hash.pairs)
-  return &pairs_;
+inline ::google::protobuf::RepeatedPtrField< ::memcached_zen::HashEntry >*
+Hash::mutable_entries() {
+  // @@protoc_insertion_point(field_mutable_list:memcached_zen.Hash.entries)
+  return &entries_;
 }
 
 

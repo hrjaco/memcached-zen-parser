@@ -20,12 +20,12 @@ namespace memcached_zen {
 
 namespace {
 
+const ::google::protobuf::Descriptor* HashEntry_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  HashEntry_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Hash_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Hash_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Hash_Pair_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  Hash_Pair_reflection_ = NULL;
 
 }  // namespace
 
@@ -36,9 +36,25 @@ void protobuf_AssignDesc_memcached_2dzen_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "memcached-zen.proto");
   GOOGLE_CHECK(file != NULL);
-  Hash_descriptor_ = file->message_type(0);
+  HashEntry_descriptor_ = file->message_type(0);
+  static const int HashEntry_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HashEntry, key_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HashEntry, value_),
+  };
+  HashEntry_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      HashEntry_descriptor_,
+      HashEntry::default_instance_,
+      HashEntry_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HashEntry, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HashEntry, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(HashEntry));
+  Hash_descriptor_ = file->message_type(1);
   static const int Hash_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hash, pairs_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hash, entries_),
   };
   Hash_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -51,22 +67,6 @@ void protobuf_AssignDesc_memcached_2dzen_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Hash));
-  Hash_Pair_descriptor_ = Hash_descriptor_->nested_type(0);
-  static const int Hash_Pair_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hash_Pair, key_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hash_Pair, value_),
-  };
-  Hash_Pair_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      Hash_Pair_descriptor_,
-      Hash_Pair::default_instance_,
-      Hash_Pair_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hash_Pair, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hash_Pair, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Hash_Pair));
 }
 
 namespace {
@@ -80,18 +80,18 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Hash_descriptor_, &Hash::default_instance());
+    HashEntry_descriptor_, &HashEntry::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Hash_Pair_descriptor_, &Hash_Pair::default_instance());
+    Hash_descriptor_, &Hash::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_memcached_2dzen_2eproto() {
+  delete HashEntry::default_instance_;
+  delete HashEntry_reflection_;
   delete Hash::default_instance_;
   delete Hash_reflection_;
-  delete Hash_Pair::default_instance_;
-  delete Hash_Pair_reflection_;
 }
 
 void protobuf_AddDesc_memcached_2dzen_2eproto() {
@@ -101,16 +101,16 @@ void protobuf_AddDesc_memcached_2dzen_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023memcached-zen.proto\022\rmemcached_zen\"S\n\004"
-    "Hash\022\'\n\005pairs\030\001 \003(\0132\030.memcached_zen.Hash"
-    ".Pair\032\"\n\004Pair\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001("
-    "\t", 121);
+    "\n\023memcached-zen.proto\022\rmemcached_zen\"\'\n\t"
+    "HashEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"1\n"
+    "\004Hash\022)\n\007entries\030\001 \003(\0132\030.memcached_zen.H"
+    "ashEntry", 128);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "memcached-zen.proto", &protobuf_RegisterTypes);
+  HashEntry::default_instance_ = new HashEntry();
   Hash::default_instance_ = new Hash();
-  Hash_Pair::default_instance_ = new Hash_Pair();
+  HashEntry::default_instance_->InitAsDefaultInstance();
   Hash::default_instance_->InitAsDefaultInstance();
-  Hash_Pair::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_memcached_2dzen_2eproto);
 }
 
@@ -124,27 +124,27 @@ struct StaticDescriptorInitializer_memcached_2dzen_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Hash_Pair::kKeyFieldNumber;
-const int Hash_Pair::kValueFieldNumber;
+const int HashEntry::kKeyFieldNumber;
+const int HashEntry::kValueFieldNumber;
 #endif  // !_MSC_VER
 
-Hash_Pair::Hash_Pair()
+HashEntry::HashEntry()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(constructor:memcached_zen.HashEntry)
 }
 
-void Hash_Pair::InitAsDefaultInstance() {
+void HashEntry::InitAsDefaultInstance() {
 }
 
-Hash_Pair::Hash_Pair(const Hash_Pair& from)
+HashEntry::HashEntry(const HashEntry& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(copy_constructor:memcached_zen.HashEntry)
 }
 
-void Hash_Pair::SharedCtor() {
+void HashEntry::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -152,12 +152,12 @@ void Hash_Pair::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Hash_Pair::~Hash_Pair() {
-  // @@protoc_insertion_point(destructor:memcached_zen.Hash.Pair)
+HashEntry::~HashEntry() {
+  // @@protoc_insertion_point(destructor:memcached_zen.HashEntry)
   SharedDtor();
 }
 
-void Hash_Pair::SharedDtor() {
+void HashEntry::SharedDtor() {
   if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete key_;
   }
@@ -168,28 +168,28 @@ void Hash_Pair::SharedDtor() {
   }
 }
 
-void Hash_Pair::SetCachedSize(int size) const {
+void HashEntry::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* Hash_Pair::descriptor() {
+const ::google::protobuf::Descriptor* HashEntry::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Hash_Pair_descriptor_;
+  return HashEntry_descriptor_;
 }
 
-const Hash_Pair& Hash_Pair::default_instance() {
+const HashEntry& HashEntry::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_memcached_2dzen_2eproto();
   return *default_instance_;
 }
 
-Hash_Pair* Hash_Pair::default_instance_ = NULL;
+HashEntry* HashEntry::default_instance_ = NULL;
 
-Hash_Pair* Hash_Pair::New() const {
-  return new Hash_Pair;
+HashEntry* HashEntry::New() const {
+  return new HashEntry;
 }
 
-void Hash_Pair::Clear() {
+void HashEntry::Clear() {
   if (_has_bits_[0 / 32] & 3) {
     if (has_key()) {
       if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -206,11 +206,11 @@ void Hash_Pair::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Hash_Pair::MergePartialFromCodedStream(
+bool HashEntry::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(parse_start:memcached_zen.HashEntry)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -263,17 +263,17 @@ bool Hash_Pair::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(parse_success:memcached_zen.HashEntry)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(parse_failure:memcached_zen.HashEntry)
   return false;
 #undef DO_
 }
 
-void Hash_Pair::SerializeWithCachedSizes(
+void HashEntry::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(serialize_start:memcached_zen.HashEntry)
   // optional string key = 1;
   if (has_key()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -298,12 +298,12 @@ void Hash_Pair::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(serialize_end:memcached_zen.HashEntry)
 }
 
-::google::protobuf::uint8* Hash_Pair::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* HashEntry::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(serialize_to_array_start:memcached_zen.HashEntry)
   // optional string key = 1;
   if (has_key()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -330,11 +330,11 @@ void Hash_Pair::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:memcached_zen.Hash.Pair)
+  // @@protoc_insertion_point(serialize_to_array_end:memcached_zen.HashEntry)
   return target;
 }
 
-int Hash_Pair::ByteSize() const {
+int HashEntry::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -364,10 +364,10 @@ int Hash_Pair::ByteSize() const {
   return total_size;
 }
 
-void Hash_Pair::MergeFrom(const ::google::protobuf::Message& from) {
+void HashEntry::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Hash_Pair* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Hash_Pair*>(
+  const HashEntry* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const HashEntry*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -376,7 +376,7 @@ void Hash_Pair::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Hash_Pair::MergeFrom(const Hash_Pair& from) {
+void HashEntry::MergeFrom(const HashEntry& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_key()) {
@@ -389,24 +389,24 @@ void Hash_Pair::MergeFrom(const Hash_Pair& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Hash_Pair::CopyFrom(const ::google::protobuf::Message& from) {
+void HashEntry::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Hash_Pair::CopyFrom(const Hash_Pair& from) {
+void HashEntry::CopyFrom(const HashEntry& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Hash_Pair::IsInitialized() const {
+bool HashEntry::IsInitialized() const {
 
   return true;
 }
 
-void Hash_Pair::Swap(Hash_Pair* other) {
+void HashEntry::Swap(HashEntry* other) {
   if (other != this) {
     std::swap(key_, other->key_);
     std::swap(value_, other->value_);
@@ -416,19 +416,19 @@ void Hash_Pair::Swap(Hash_Pair* other) {
   }
 }
 
-::google::protobuf::Metadata Hash_Pair::GetMetadata() const {
+::google::protobuf::Metadata HashEntry::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Hash_Pair_descriptor_;
-  metadata.reflection = Hash_Pair_reflection_;
+  metadata.descriptor = HashEntry_descriptor_;
+  metadata.reflection = HashEntry_reflection_;
   return metadata;
 }
 
 
-// -------------------------------------------------------------------
+// ===================================================================
 
 #ifndef _MSC_VER
-const int Hash::kPairsFieldNumber;
+const int Hash::kEntriesFieldNumber;
 #endif  // !_MSC_VER
 
 Hash::Hash()
@@ -484,7 +484,7 @@ Hash* Hash::New() const {
 }
 
 void Hash::Clear() {
-  pairs_.Clear();
+  entries_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -499,16 +499,16 @@ bool Hash::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .memcached_zen.Hash.Pair pairs = 1;
+      // repeated .memcached_zen.HashEntry entries = 1;
       case 1: {
         if (tag == 10) {
-         parse_pairs:
+         parse_entries:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_pairs()));
+                input, add_entries()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(10)) goto parse_pairs;
+        if (input->ExpectTag(10)) goto parse_entries;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -538,10 +538,10 @@ failure:
 void Hash::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:memcached_zen.Hash)
-  // repeated .memcached_zen.Hash.Pair pairs = 1;
-  for (int i = 0; i < this->pairs_size(); i++) {
+  // repeated .memcached_zen.HashEntry entries = 1;
+  for (int i = 0; i < this->entries_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->pairs(i), output);
+      1, this->entries(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -554,11 +554,11 @@ void Hash::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Hash::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:memcached_zen.Hash)
-  // repeated .memcached_zen.Hash.Pair pairs = 1;
-  for (int i = 0; i < this->pairs_size(); i++) {
+  // repeated .memcached_zen.HashEntry entries = 1;
+  for (int i = 0; i < this->entries_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        1, this->pairs(i), target);
+        1, this->entries(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -572,12 +572,12 @@ void Hash::SerializeWithCachedSizes(
 int Hash::ByteSize() const {
   int total_size = 0;
 
-  // repeated .memcached_zen.Hash.Pair pairs = 1;
-  total_size += 1 * this->pairs_size();
-  for (int i = 0; i < this->pairs_size(); i++) {
+  // repeated .memcached_zen.HashEntry entries = 1;
+  total_size += 1 * this->entries_size();
+  for (int i = 0; i < this->entries_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->pairs(i));
+        this->entries(i));
   }
 
   if (!unknown_fields().empty()) {
@@ -605,7 +605,7 @@ void Hash::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Hash::MergeFrom(const Hash& from) {
   GOOGLE_CHECK_NE(&from, this);
-  pairs_.MergeFrom(from.pairs_);
+  entries_.MergeFrom(from.entries_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -628,7 +628,7 @@ bool Hash::IsInitialized() const {
 
 void Hash::Swap(Hash* other) {
   if (other != this) {
-    pairs_.Swap(&other->pairs_);
+    entries_.Swap(&other->entries_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
