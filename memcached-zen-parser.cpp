@@ -67,7 +67,7 @@ int get_sub_keys_len(const void* value, int value_len, char* req, int req_len)
     return hash_result.ByteSize();
 }
 
-int get_sub_keys(const void* value, int value_len, char* req, int req_len, void** result)
+int get_sub_keys(const void* value, int value_len, char* req, int req_len, void* result)
 {
     // Parse requested sub keys from req.
     // zen:[namespace]:n:<node-id>|property1,property2,...,propertyN
@@ -112,8 +112,8 @@ int get_sub_keys(const void* value, int value_len, char* req, int req_len, void*
     }
 
     int result_len = hash_result.ByteSize();
-    *result = malloc(result_len);
-    hash_result.SerializeToArray(*result, result_len);
+    // *result = malloc(result_len);
+    hash_result.SerializeToArray(result, result_len);
     return result_len;
 }
 

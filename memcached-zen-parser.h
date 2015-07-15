@@ -5,7 +5,7 @@
 #ifdef __cplusplus
 extern "C"{
 #endif
-    int get_sub_keys(const void* value, int value_len, char* req, int req_len, void** result);
+    int get_sub_keys(const void* value, int value_len, char* req, int req_len, void* result);
     int get_sub_keys_len(const void* value, int value_len, char* req, int req_len);
 #ifdef __cplusplus
 };
