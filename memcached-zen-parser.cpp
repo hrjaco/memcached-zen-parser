@@ -117,6 +117,39 @@ int get_sub_keys(const void* value, int value_len, char* req, int req_len, void*
     return result_len;
 }
 
+char *create_serialized_data(int *result_len)
+{
+    // Parse requested sub keys from req.
+    // zen:[namespace]:n:<node-id>|property1,property2,...,propertyN
+
+    Hash hash;
+    for (int i = 0; i < 10; i++) {
+        HashEntry* e = hash.add_entries();
+        e->set_key(std::to_string(i));
+        e->set_value(std::to_string(i + 100));
+    }
+
+    *result_len = hash.ByteSize();
+    char *result = (char*)malloc(*result_len);
+    hash.SerializeToArray(result, *result_len);
+    return result;
+}
+
+void print_serialized_hash(char *data, int data_len)
+{
+    Hash hash;
+    bool ok = hash.ParseFromArray(data, data_len);
+    if (!ok) {
+        return;
+    }
+
+    for (int i = 0; i < hash.entries_size(); i++) {
+        auto& e = hash.entries(i);
+        cout << "key: " << e.key() << endl;
+        cout << "value: " << e.value() << endl;
+    }
+}
+
 // int
 // main(int argc, char **argv)
 // {
