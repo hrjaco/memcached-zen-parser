@@ -20,6 +20,61 @@ const HashEntry* find_key_from_hash(char* s, int len, Hash& hash) {
     return NULL;
 }
 
+void *extract_sub_keys(const void* value, int value_len, char* req, int req_len, item_alloc_func item_alloc, item_data_func item_data)
+{
+    // Parse requested sub keys from req.
+    // zen:[namespace]:n:<node-id>|property1,property2,...,propertyN
+
+    Hash hash;  /* original hash stored as the value */
+    Hash hash_result;  /* hash result which only contains the requested sub keys */
+
+    bool ok = hash.ParseFromArray(value, value_len);
+    if (!ok) {
+        /* the original value is not stored as a Hash object */
+        return NULL;
+    }
+
+    /* does the request contains sub keys? */
+    int sub_key_start = 0;
+    while (sub_key_start < req_len) {
+        if (req[sub_key_start++] == '|') {
+            break;
+        }
+    }
+    if (sub_key_start == req_len) {
+        /* the request does not contain sub keys */
+        return 0;
+    }
+
+    /* find all the requested sub keys */
+    int sub_key_len = 0;
+    int i = sub_key_start;
+    while (i <= req_len) {
+        if (req[i] == ',' || i == req_len) {
+            sub_key_len = i - sub_key_start;
+            const HashEntry* e = find_key_from_hash(req + sub_key_start, sub_key_len, hash);
+            if (e != NULL) {
+                /* add this entry to the result */
+                HashEntry* e2 = hash_result.add_entries();
+                e2->set_key(e->key());
+                e2->set_value(e->value());
+            }
+            sub_key_start = i + 1;
+        }
+        i++;
+    }
+
+    int result_len = hash_result.ByteSize();
+    printf("result_len: %d\n", result_len);
+    void *item = item_alloc(req, req_len, 0, 0, result_len + 2);
+    printf("item_alloc finished\n");
+
+    // *result = malloc(result_len);
+    hash_result.SerializeToArray(item_data(item), result_len);
+    printf("SerializeToArray finished\n");
+    return item;
+}
+
 int get_sub_keys_len(const void* value, int value_len, char* req, int req_len)
 {
     // Parse requested sub keys from req.
@@ -148,6 +203,14 @@ void print_serialized_hash(char *data, int data_len)
         cout << "key: " << e.key() << endl;
         cout << "value: " << e.value() << endl;
     }
+}
+
+void *item_alloc_impl(char *key, size_t nkey, int flags, unsigned int exptime, int nbytes) {
+    return malloc(nbytes);
+}
+
+void *item_data_impl(void *item) {
+    return item;
 }
 
 // int

@@ -22,7 +22,7 @@
 
 CC=g++
 C=gcc
-CFLAGS=-c -Wall -std=c++0x
+CFLAGS=-g -c -Wall -std=c++0x
 LDFLAGS=-pthread -lprotobuf
 CC_SOURCES=memcached-zen.pb.cc
 CXX_SOURCES=memcached-zen-parser.cpp

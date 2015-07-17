@@ -1,5 +1,7 @@
 package memcached_zen;
 
+option cc_enable_arenas = true;
+
 message HashEntry {
   optional string key = 1;
   optional string value = 2;
